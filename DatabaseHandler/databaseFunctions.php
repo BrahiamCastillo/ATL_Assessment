@@ -1,8 +1,8 @@
 <?php
 
 require_once 'databaseConnection.php';
-require_once 'Models\phone_number.php';
-require_once 'Models\contacts.php';
+require_once '..\Models\phone_number.php';
+require_once '..\Models\contacts.php';
 
 class DatabaseFunctions {
 
@@ -32,9 +32,7 @@ class DatabaseFunctions {
                 $phone_number = new Phone_Numer();
 
                 $phone_number->mapData(
-                    $row->idphone_number,
-                    $row->idcontact,
-                    $row->phone_number,
+                   $row
                 );
 
                 array_push($list, $phone_number);
@@ -62,10 +60,7 @@ class DatabaseFunctions {
                 $contact = new Contacts();
 
                 $contact->mapData(
-                    $row->idcontact,
-                    $row->name,
-                    $row->last_name,
-                    $row->email,
+                    $row,
                     $this->getPhoneNumbersById($row->idcontact)
                 );
 
@@ -74,6 +69,34 @@ class DatabaseFunctions {
 
             $stm->close();
             return $list;
+        }
+    }
+
+
+    public function getContactByID($id)
+    {
+
+        $stm = $this->connection->db->prepare('Select * FROM contacts where idcontact = ?');
+        $stm->bind_param('i', $id);
+        $stm->execute();
+
+        $result = $stm->get_result();
+
+        if ($result->num_rows === 0) {
+
+            return null;
+        } else {
+
+            $row = $result->fetch_object();
+            $contact = new Contacts();
+
+            $contact->mapData(
+                $row,
+                $this->getPhoneNumbersById($row->idcontact)
+            );
+
+            $stm->close();
+            return $contact;
         }
     }
 }

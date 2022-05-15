@@ -8,13 +8,13 @@ class Phone_Numer {
 
     public function mapData(
 
-        $id_phoneNumber,
-        $id_contact,
-        $phone_number
+        $object
     ) {
 
-        $this->id_phoneNumber = $id_phoneNumber;
-        $this->id_contact = $id_contact;
-        $this->phone_number = $phone_number;
+        $this->id_phoneNumber = $object->idphone_number;
+        $this->id_contact = $object->idcontact;
+        $this->phone_number = $object->phone_number;
+
+       
     }
 }

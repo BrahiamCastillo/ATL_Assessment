@@ -12,16 +12,13 @@ class Contacts {
 
     public function mapData(
 
-        $idcontact,
-        $name,
-        $last_name,
-        $email = '0',
-        $contacts = '0'
+       $object,
+       $contacts
     ) {
-        $this->idcontact = $idcontact;
-        $this->name = $name;
-        $this->last_name = $last_name;
-        $this->email = $email;
+        $this->idcontact = $object->idcontact;
+        $this->name = $object->name;
+        $this->last_name = $object->last_name;
+        $this->email = $object->email;
         $this->contacts = $contacts;
       
     }
