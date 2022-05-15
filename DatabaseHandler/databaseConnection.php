@@ -5,7 +5,7 @@ class databaseConnection {
 
     function __construct()
     {
-        $this->db = new mysqli("127.0.0.1","root","br4h14m123","atl_assessment");
+        $this->db = new mysqli("localhost","id18937708_root","w%kJy{WIy81~$43L","id18937708_atl_assessment");
 
         if($this->db->connect_error) {
 
